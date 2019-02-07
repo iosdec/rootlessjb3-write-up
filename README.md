@@ -17,14 +17,14 @@ Requirements:
 First step, is to make sure you actually have the .deb file.
 If you don't know what a .deb file is, it's basically a zipped up file containing the contents of the tweak/app.
 
-1:  Folder setup
+##### 1:  Folder setup
 Head over to your Desktop and create a folder for your tweak and lay it out like so:
 
   - mytweak
     - mytweak.deb
     - patcherplus
     
-2:  Modifying the patcherplus permissions
+##### 2:  Modifying the patcherplus permissions
 Now open terminal, change to your "mytweak" directory and modify the permissions of patcherplus to +x.
 
 Terminal:
@@ -33,7 +33,7 @@ cd ~/Desktop/mytweak
 chmod +x patcherplus
 ```
 
-3:  Running patcherplus
+##### 3:  Running patcherplus
 What patcherplus will do, is run through the .deb file, and sign the .dylib files for MobileSubstrate with the correct entitlements. NOTE if you're planning on installing an .app file from the .deb, you will NEED to sign this manually with ldid2. patcherplus requires you to enter the .deb file, then the output file after, so enter the following in terminal:
 
 Terminal:
@@ -43,10 +43,10 @@ mytweak.deb
 mytweakoutput
 ```
 
-4:  Check contents
+##### 4:  Check contents
 Once patcherplus has finished running, you will be left with a new folder (in our case "mytweakoutput"). This folder contains the contents of the extracted .deb file; with the .dylib files signed (inside Library/MobileSubstrate/DynamicLibraries). The .dylib files are used by mobilesubstrate for tweaks. NOTE: ONLY the dylib files get signed.. if you're installing a .app file, follow the optional step below.
 
-5:  (FOR .app installations only)
+##### 5:  (FOR .app installations only)
 If your output folder contains a folder called "Applications", you will need to follow this step.
 The executable in the .app file needs to get signed with the proper entitlements.. this is a MUST.
 The entitlements must AT LEAST include these 2 to function. (Obviously they can include more, but these are minimum).
@@ -90,11 +90,11 @@ Do to this use "install_name_tool (you will need to get a copy of CydiaSubstrate
 install_name_tool -change /old/directory/CydiaSubstrate.framework/CydiaSubstrate /var/LIB/Frameworks/CydiaSubstrate/CydiaSubstrate myapp.app/myapp
 ```
 
-6:  Copying the files to your iOS Device
+##### 6:  Copying the files to your iOS Device
 Now we need to get these files over to your device, to do this, i recommend using a program like iMazing or iFunxBox.
 I'm using iFunBox, on the left hand side, head over to the file system (/var/mobile/Media).. you should see other files like "AirFair", "DCIM", "iTunes_Control", etc. Create a folder called "Jailbreak", and copy your "mytweakoutput" folder to "Jailbreak".
 
-7:  Moving the tweaks/apps to the appropriate places
+##### 7:  Moving the tweaks/apps to the appropriate places
 Now the files are on your device, jailbreak your phone with rootlessjb3; this will allow you to ssh into your device from your mac. So open up terminal and ssh into your device (password is alpine), then change directory to /var/mobile/Media/Jailbreak:
 
 Terminal:
@@ -151,13 +151,13 @@ uicache
 
 You should now see the app on your springboard (if you had a .app file).
 
-8:  Reboot
+##### 8:  Reboot
 You now need to hard-reboot your device.
 
-9:  Re-jailbreak
+##### 9:  Re-jailbreak
 Re-jailbreak your device with rootlessjb3 (make sure the tweaks button is ON).
 
-10: Test
+##### 10: Test
 If you're expecting JUST a tweak and not an app, open Settings and check if your preference bundle is there.
 If you're expecting an app.. there's 1 more step.. you need to allow amfi to let your app run, to do this go to terminal and type:
 
